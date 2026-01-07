@@ -1,0 +1,134 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+body {
+    background: #f4f6f9;
+    color: #333;
+}
+
+.navbar {
+    background: #0b3c5d;
+    color: white;
+    padding: 15px 40px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+}
+
+.content {
+    max-width: 1100px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+section {
+    background: white;
+    padding: 25px;
+    margin-bottom: 25px;
+    border-left: 5px solid #0b3c5d;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+label {
+    font-weight: 600;
+    display: block;
+    margin-top: 10px;
+}
+
+input, select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+}
+
+button {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background: #0b3c5d;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.preview-box {
+    background: #eef4f8;
+    padding: 15px;
+    margin-top: 15px;
+}
+
+.footer {
+    background: #0b3c5d;
+    color: white;
+    text-align: center;
+    padding: 15px;
+}
+
+.dark-mode {
+    background: #121212;
+    color: #eee;
+}
+
+.dark-mode section {
+    background: #1e1e1e;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+}
+
+.modal-content {
+    background: white;
+    width: 300px;
+    padding: 20px;
+    margin: 120px auto;
+}
+
+/* ===== DARK MODE FIX ===== */
+
+.dark-mode {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+.dark-mode section {
+    background-color: #1e1e1e;
+    color: #e0e0e0;
+    border-left-color: #4fa3d1;
+}
+
+.dark-mode label,
+.dark-mode h2,
+.dark-mode h3,
+.dark-mode p,
+.dark-mode strong {
+    color: #ffffff;
+}
+
+.dark-mode input,
+.dark-mode select {
+    background-color: #2c2c2c;
+    color: #ffffff;
+    border: 1px solid #555;
+}
+
+.dark-mode .navbar,
+.dark-mode .footer {
+    background-color: #1a1a1a;
+    color: #ffffff;
+}
+
+.dark-mode .preview-box {
+    background-color: #2a2a2a;
+}

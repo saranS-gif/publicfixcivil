@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Issue Analytics | PUBLICFIX</title>
+
+    <style>
+        body {
+            font-family: "Segoe UI", sans-serif;
+            background: linear-gradient(135deg, #07b3f1d7, #030404);
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+            margin: 30px 0;
+            letter-spacing: 1px;
+        }
+
+        .container {
+            width: 92%;
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        .bar-row {
+            margin: 18px 0;
+        }
+
+        .label {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .bar-bg {
+            background: #e5e7eb;
+            height: 16px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .bar-fill {
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.6s ease;
+        }
+
+        .pothole { background: #ef4444; }
+        .garbage { background: #f97316; }
+        .light { background: #eab308; }
+        .water { background: #3b82f6; }
+        .other { background: #22c55e; }
+
+        .note {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #00060fc1;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>📊 Category-wise Issue Breakdown</h1>
+
+<div class="container">
+    <div class="card" id="chart"></div>
+</div>
+
+<script>
+    const complaints = JSON.parse(localStorage.getItem("complaints")) || [];
+
+    const categories = {
+        pothole: 0,
+        garbage: 0,
+        light: 0,
+        water: 0,
+        other: 0
+    };
+
+    complaints.forEach(c => {
+        const text = c.desc.toLowerCase();
+
+        if (text.includes("pothole")) categories.pothole++;
+        else if (text.includes("garbage") || text.includes("waste")) categories.garbage++;
+        else if (text.includes("light")) categories.light++;
+        else if (text.includes("water") || text.includes("leak")) categories.water++;
+        else categories.other++;
+    });
+
+    const total = Object.values(categories).reduce((a,b) => a + b, 0) || 1;
+
+    const chart = document.getElementById("chart");
+
+    chart.innerHTML = `
+        ${createBar("Potholes", categories.pothole, total, "pothole")}
+        ${createBar("Garbage", categories.garbage, total, "garbage")}
+        ${createBar("Street Lights", categories.light, total, "light")}
+        ${createBar("Water Leakage", categories.water, total, "water")}
+        ${createBar("Others", categories.other, total, "other")}
+
+        <p class="note">
+            ✔ Helps authorities identify high-impact problem areas and allocate resources effectively.
+        </p>
+    `;
+
+    function createBar(label, value, total, cls) {
+        const percent = Math.round((value / total) * 100);
+        return `
+            <div class="bar-row">
+                <div class="label">
+                    <span>${label}</span>
+                    <span>${percent}%</span>
+                </div>
+                <div class="bar-bg">
+                    <div class="bar-fill ${cls}" style="width:${percent}%"></div>
+                </div>
+            </div>
+        `;
+    }
+</script>
+
+</body>
+</html>

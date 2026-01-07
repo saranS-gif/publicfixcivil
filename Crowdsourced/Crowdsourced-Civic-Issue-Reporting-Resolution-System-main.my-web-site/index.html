@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Civic Issue Reporting System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Navbar -->
+<header class="navbar">
+    <div class="auth">
+        <a href="./login.html">Login</a>
+        <a href="./signup.html" class="signup">Create Account</a>
+    </div>
+
+    <nav class="nav-links">
+        <a href="./index.html">Home</a>
+        <a href="./womensafety.html">Women Safety</a>
+        <a href="./report issue.html">Complaints</a>
+        <a href="./about us.html">About Us</a>
+        <a href="./contact us.html">Contact Us</a>
+    </nav>
+</header>
+
+<!-- Main Layout -->
+<div class="container">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <h2>Dashboard</h2>
+        <button onclick="location.href='./report issue.html'">Report Issue</button>
+        <button onclick="location.href='./my complaint.html'">My Complaints</button>
+        <button onclick="location.href='./complaint status.html'">Complaint Status</button>
+        <button onclick="location.href='./womensafety.html'">Emergency Help</button>
+        <button onclick="location.href='./settings.html'">Settings</button>
+        <button onclick="location.href='./category.html'">Category-Wise</button>
+    </aside>
+
+    <!-- Main Content -->
+    <section class="main-area">
+
+        <!-- Image Slider -->
+        <div class="slider">
+            <div class="slides" id="slides">
+                <img src="./Potholes.webp" alt="Potholes">
+                <img src="./Garbage Overflow.jpg" alt="Garbage">
+                <img src="./Broken Street Lights.jpg" alt="Street Lights">
+                <img src="./Water Leakage.jpg" alt="Water Leakage">
+                <img src="./Open Drains.webp" alt="Road Damage">
+                <img src="./Unsafe Public Places.jpg" alt="Public Safety">
+            </div>
+
+            <button class="nav prev" onclick="moveSlide(-1)">❮</button>
+            <button class="nav next" onclick="moveSlide(1)">❯</button>
+
+            <div class="counter" id="counter">1 / 6</div>
+        </div>
+
+        <!-- Text Content (Below Image) -->
+        <div class="content">
+            <h1>Crowdsourced Civic Issue Reporting</h1>
+
+            <p>
+                This platform empowers citizens to actively participate in improving
+                their city by reporting civic issues directly to government authorities.
+            </p>
+
+            <p>
+                By using technology and community participation, the system ensures
+                transparency, accountability, and faster resolution of problems.
+            </p>
+
+            <p>
+                Authorities can analyze issue trends, prioritize resources, and
+                enhance public service delivery using centralized data.
+            </p>
+
+            <div class="problem-box">
+                <h3>Common Civic Issues</h3>
+                <ul>
+                    <li>Potholes</li>
+                    <li>Garbage Overflow</li>
+                    <li>Broken Street Lights</li>
+                    <li>Water Leakage</li>
+                    <li>Open Drains</li>
+                    <li>Unsafe Public Places</li>
+                </ul>
+            </div>
+        </div>
+
+    </section>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-about">
+        <h3>About Us</h3>
+        <p>
+            A digital governance platform bridging citizens and government bodies
+            to ensure transparent, efficient, and timely civic issue resolution.
+        </p>
+    </div>
+
+    <div class="footer-contact">
+        <h3>Contact Us</h3>
+        <p>Email: support@civicissuesystem.in</p>
+        <p>Phone: +91 98765 43210</p>
+        <p>Address: Smart City Office, Chennai, India</p>
+    </div>
+
+    <p class="copyright">
+        © 2026 Civic Issue Reporting System | All Rights Reserved
+    </p>
+</footer>
+
+<!-- Slider Script -->
+<script>
+let index = 0;
+const slides = document.getElementById("slides");
+const total = slides.children.length;
+const counter = document.getElementById("counter");
+
+function moveSlide(step) {
+    index += step;
+    if (index < 0) index = total - 1;
+    if (index >= total) index = 0;
+    slides.style.transform = `translateX(-${index * 100}%)`;
+    counter.innerText = `${index + 1} / ${total}`;
+}
+
+setInterval(() => moveSlide(1), 4000);
+</script>
+
+</body>
+</html>

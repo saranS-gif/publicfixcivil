@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login | Civic Issue Reporting System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #0b96d2, #203a43, #08d8b6);
+        }
+
+        .login-box {
+            width: 400px;
+            padding: 35px;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+            color: #fff;
+            animation: fadeIn 1s ease;
+        }
+
+        .login-box h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .login-box input {
+            width: 100%;
+            padding: 12px 15px;
+            margin: 12px 0;
+            border-radius: 30px;
+            border: none;
+            outline: none;
+            font-size: 14px;
+        }
+
+        .login-box input::placeholder {
+            color: #777;
+        }
+
+        .login-box button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 15px;
+            border-radius: 30px;
+            border: none;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+            color: #fff;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .login-box button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,114,255,0.6);
+        }
+
+        .login-box p {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        .login-box a {
+            color: #00c6ff;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .login-box a:hover {
+            text-decoration: underline;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-box">
+    <h2>User Login</h2>
+
+    <input type="text" placeholder="Username" required>
+    <input type="tel" placeholder="Mobile Number" required>
+
+    <button onclick="login()">Login</button>
+
+    <p>
+        New user? <a href="signup.html">Create Account</a>
+    </p>
+</div>
+
+<script>
+    function login() {
+        window.location.href = "index.html";
+    }
+</script>
+
+</body>
+</html>
