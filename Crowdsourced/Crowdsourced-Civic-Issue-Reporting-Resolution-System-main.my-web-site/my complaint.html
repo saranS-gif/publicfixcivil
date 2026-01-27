@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Complaints | PUBLICFIX</title>
+
+    <style>
+        body {
+            font-family: "Segoe UI", sans-serif;
+            background: linear-gradient(135deg, #6366f1, #0ea5e9);
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+            margin: 30px 0;
+            letter-spacing: 1px;
+        }
+
+        .container {
+            width: 92%;
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .card {
+            background: white;
+            padding: 22px;
+            border-radius: 14px;
+            margin-bottom: 20px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        .complaint {
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+            margin-top: 15px;
+        }
+
+        .complaint img {
+            width: 100%;
+            max-height: 250px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin: 10px 0;
+        }
+
+        .status {
+            font-weight: bold;
+        }
+
+        .status.Pending {
+            color: #dc2626;
+        }
+
+        .status.Resolved {
+            color: #16a34a;
+        }
+
+        .status.InProgress {
+            color: #ea580c;
+        }
+
+        .priority-high {
+            color: #dc2626;
+            font-weight: 700;
+        }
+
+        .priority-medium {
+            color: #ea580c;
+            font-weight: 700;
+        }
+
+        .priority-low {
+            color: #16a34a;
+            font-weight: 700;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 40px;
+            color: #555;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>My Complaints</h1>
+
+<div class="container">
+    <div class="card" id="complaintsBox">
+        <!-- Complaints will appear here -->
+    </div>
+</div>
+
+<script>
+    const complaints = JSON.parse(localStorage.getItem("complaints")) || [];
+    const box = document.getElementById("complaintsBox");
+
+    if (complaints.length === 0) {
+        box.innerHTML = `<div class="empty">You have not reported any complaints yet.</div>`;
+    } else {
+        complaints.forEach(c => {
+            let priority = "Low", cls = "priority-low";
+            if (c.upvotes >= 5) { priority = "High"; cls = "priority-high"; }
+            else if (c.upvotes >= 2) { priority = "Medium"; cls = "priority-medium"; }
+
+            const div = document.createElement("div");
+            div.className = "complaint";
+            div.innerHTML = `
+                <p><b>Issue Description:</b> ${c.desc}</p>
+                <p>📍 <b>Location:</b> ${c.location}</p>
+                <p>Status: <span class="status ${c.status.replace(" ", "")}">${c.status}</span></p>
+                <p>Priority: <span class="${cls}">${priority}</span></p>
+                <p>👍 Upvotes: ${c.upvotes}</p>
+                ${c.photo ? `<img src="${c.photo}">` : ""}
+            `;
+            box.appendChild(div);
+        });
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Complaint Status | PUBLICFIX</title>
+
+    <style>
+        body {
+            font-family: "Segoe UI", sans-serif;
+            background: linear-gradient(135deg, #6366f1, #0ea5e9);
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+            margin: 30px 0;
+        }
+
+        .container {
+            width: 92%;
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .card {
+            background: white;
+            padding: 22px;
+            border-radius: 14px;
+            margin-bottom: 20px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        .complaint {
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+            margin-top: 15px;
+        }
+
+        .step {
+            padding: 6px 0;
+            font-weight: 600;
+        }
+
+        .done { color: #16a34a; }
+        .current { color: #ea580c; }
+        .pending { color: #dc2626; }
+    </style>
+</head>
+
+<body>
+
+<h1>Track Your Complaint</h1>
+
+<div class="container">
+    <div class="card" id="statusBox"></div>
+</div>
+
+<script>
+    const complaints = JSON.parse(localStorage.getItem("complaints")) || [];
+    const box = document.getElementById("statusBox");
+
+    if (complaints.length === 0) {
+        box.innerHTML = "No complaints found.";
+    }
+
+    complaints.forEach(c => {
+        const div = document.createElement("div");
+        div.className = "complaint";
+
+        div.innerHTML = `
+            <p><b>Issue:</b> ${c.desc}</p>
+            <p>📍 ${c.location}</p>
+            <p><b>Status:</b> ${c.status}</p>
+
+            <div class="step done">✔ Complaint Submitted</div>
+            <div class="step ${c.status === 'Pending' ? 'current' : 'done'}">
+                ${c.status === 'Pending' ? '⏳ Sent to Municipality' : '✔ Sent to Municipality'}
+            </div>
+            <div class="step ${c.status === 'In Process' ? 'current' : (c.status === 'Finished' ? 'done' : 'pending')}">
+                ${c.status === 'In Process' || c.status === 'Finished'
+                    ? '✔ Work In Progress'
+                    : '⏳ Work In Progress'}
+            </div>
+            <div class="step ${c.status === 'Finished' ? 'done' : 'pending'}">
+                ${c.status === 'Finished' ? '✔ Issue Resolved' : '⏳ Resolution Pending'}
+            </div>
+        `;
+
+        box.appendChild(div);
+    });
+</script>
+
+</body>
+</html>

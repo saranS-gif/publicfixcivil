@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Settings | Civic Issue Reporting System</title>
+    <link rel="stylesheet" href="sett.css">
+</head>
+<body>
+
+<!-- Navbar -->
+<header class="navbar">
+    <h2 id="settingsTitle">Settings</h2>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="women-safety.html">Women Safety</a>
+        <a href="settings.html">Settings</a>
+    </nav>
+</header>
+
+<!-- Main Content -->
+<main class="content">
+
+    <!-- Profile -->
+    <section>
+        <h2 id="profileTitle">Profile Settings</h2>
+        <form onsubmit="updateProfile(event)">
+            <label id="nameLabel">Name</label>
+            <input type="text" id="name">
+
+            <label id="emailLabel">Email</label>
+            <input type="email" id="email">
+
+            <label id="phoneLabel">Phone Number</label>
+            <input type="tel" id="phone">
+
+            <button id="updateBtn">Update Profile</button>
+        </form>
+
+        <div class="preview-box">
+            <p><strong>Name:</strong> <span id="pName">Not Updated</span></p>
+            <p><strong>Email:</strong> <span id="pEmail">Not Updated</span></p>
+            <p><strong>Phone:</strong> <span id="pPhone">Not Updated</span></p>
+        </div>
+    </section>
+
+    <!-- Emergency Contacts -->
+    <section>
+        <h2 id="contactTitle">Emergency Contacts</h2>
+        <form onsubmit="updateContacts(event)">
+            <input type="text" id="contact1" placeholder="Contact 1">
+            <input type="text" id="contact2" placeholder="Contact 2">
+            <input type="text" id="contact3" placeholder="Contact 3">
+            <button>Save Contacts</button>
+        </form>
+
+        <div class="preview-box">
+            <p><strong>Contact 1:</strong> <span id="c1">Not Updated</span></p>
+            <p><strong>Contact 2:</strong> <span id="c2">Not Updated</span></p>
+            <p><strong>Contact 3:</strong> <span id="c3">Not Updated</span></p>
+        </div>
+    </section>
+
+    <!-- Notifications -->
+    <section>
+        <h2>Notification Preferences</h2>
+        <label><input type="checkbox" checked> Complaint Status Updates</label><br>
+        <label><input type="checkbox" checked> Emergency Alerts</label><br>
+        <label><input type="checkbox"> Email Notifications</label>
+    </section>
+
+    <!-- Privacy -->
+    <section>
+        <h2>Privacy & Security</h2>
+        <label><input type="checkbox"> Anonymous Complaint Mode</label><br>
+        <label><input type="checkbox"> Share Location During SOS</label><br><br>
+        <button onclick="openPasswordModal()">Change Password</button>
+    </section>
+
+    <!-- App Settings -->
+    <section>
+        <h2>App Preferences</h2>
+
+        <label>Language</label>
+        <select id="languageSelect" onchange="changeLanguage()">
+            <option value="en">English</option>
+            <option value="ta">Tamil</option>
+            <option value="hi">Hindi</option>
+        </select>
+
+        <label>Theme</label>
+        <select onchange="toggleTheme(this.value)">
+            <option value="light">Light Mode</option>
+            <option value="dark">Dark Mode</option>
+        </select>
+    </section>
+
+</main>
+
+<footer class="footer">
+    © 2026 Civic Issue Reporting System
+</footer>
+
+<!-- Password Modal -->
+<div id="passwordModal" class="modal">
+    <div class="modal-content">
+        <h3>Change Password</h3>
+        <input type="password" placeholder="Current Password">
+        <input type="password" placeholder="New Password">
+        <input type="password" placeholder="Confirm Password">
+        <button onclick="closePasswordModal()">Update</button>
+    </div>
+</div>
+
+<script>
+function updateProfile(e) {
+    e.preventDefault();
+
+    document.getElementById("pName").innerText =
+        document.getElementById("name").value || "Not Updated";
+
+    document.getElementById("pEmail").innerText =
+        document.getElementById("email").value || "Not Updated";
+
+    document.getElementById("pPhone").innerText =
+        document.getElementById("phone").value || "Not Updated";
+}
+
+function updateContacts(e) {
+    e.preventDefault();
+
+    document.getElementById("c1").innerText =
+        document.getElementById("contact1").value || "Not Updated";
+
+    document.getElementById("c2").innerText =
+        document.getElementById("contact2").value || "Not Updated";
+
+    document.getElementById("c3").innerText =
+        document.getElementById("contact3").value || "Not Updated";
+}
+
+function toggleTheme(mode) {
+    if (mode === "dark") {
+        document.body.classList.add("dark-mode");
+    } else {
+        document.body.classList.remove("dark-mode");
+    }
+}
+
+function openPasswordModal() {
+    document.getElementById("passwordModal").style.display = "block";
+}
+
+function closePasswordModal() {
+    document.getElementById("passwordModal").style.display = "none";
+}
+
+function changeLanguage() {
+    const lang = document.getElementById("languageSelect").value;
+
+    const t = {
+        en: ["Settings","Profile Settings","Name","Email","Phone Number","Update Profile","Emergency Contacts"],
+        ta: ["அமைப்புகள்","சுயவிவர அமைப்புகள்","பெயர்","மின்னஞ்சல்","தொலைபேசி எண்","புதுப்பிக்கவும்","அவசர தொடர்புகள்"],
+        hi: ["सेटिंग्स","प्रोफ़ाइल सेटिंग्स","नाम","ईमेल","फ़ोन नंबर","अपडेट करें","आपात संपर्क"]
+    };
+
+    document.getElementById("settingsTitle").innerText = t[lang][0];
+    document.getElementById("profileTitle").innerText = t[lang][1];
+    document.getElementById("nameLabel").innerText = t[lang][2];
+    document.getElementById("emailLabel").innerText = t[lang][3];
+    document.getElementById("phoneLabel").innerText = t[lang][4];
+    document.getElementById("updateBtn").innerText = t[lang][5];
+    document.getElementById("contactTitle").innerText = t[lang][6];
+}
+</script>
+
+
+</body>
+</html>

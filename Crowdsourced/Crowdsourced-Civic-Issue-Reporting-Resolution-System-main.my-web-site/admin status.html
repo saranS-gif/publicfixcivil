@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Panel | PUBLICFIX</title>
+
+    <style>
+        body {
+            font-family: "Segoe UI", sans-serif;
+            background: linear-gradient(135deg, #1e3a8a, #0284c7);
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+            margin: 30px 0;
+        }
+
+        .container {
+            width: 92%;
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .card {
+            background: white;
+            padding: 22px;
+            border-radius: 14px;
+            margin-bottom: 20px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        .complaint {
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+            margin-top: 15px;
+        }
+
+        button {
+            margin-top: 10px;
+            margin-right: 10px;
+            padding: 8px 14px;
+            border: none;
+            border-radius: 8px;
+            background: #2563eb;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>Municipality Complaint Management</h1>
+
+<div class="container">
+    <div class="card" id="adminBox"></div>
+</div>
+
+<script>
+    let complaints = JSON.parse(localStorage.getItem("complaints")) || [];
+    const box = document.getElementById("adminBox");
+
+    if (complaints.length === 0) {
+        box.innerHTML = "No complaints available.";
+    }
+
+    complaints.forEach(c => {
+        const div = document.createElement("div");
+        div.className = "complaint";
+
+        div.innerHTML = `
+            <p><b>Issue:</b> ${c.desc}</p>
+            <p>📍 ${c.location}</p>
+            <p><b>Status:</b> ${c.status}</p>
+
+            <button onclick="updateStatus(${c.id}, 'In Process')">Mark In Process</button>
+            <button onclick="updateStatus(${c.id}, 'Finished')">Mark Finished</button>
+        `;
+
+        box.appendChild(div);
+    });
+
+    function updateStatus(id, status) {
+        const item = complaints.find(c => c.id === id);
+        item.status = status;
+        localStorage.setItem("complaints", JSON.stringify(complaints));
+        location.reload();
+    }
+</script>
+
+</body>
+</html>
